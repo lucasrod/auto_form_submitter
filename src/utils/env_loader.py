@@ -17,6 +17,4 @@ def load_environment():
     if os.path.exists(env_path):
         load_dotenv(dotenv_path=env_path, override=True)
     else:
-        # If no specific env file exists, skip loading but warn
-        import logging
-        logging.warning(f"Environment file '{env_file}' not found in config/, skipping.")
+        raise FileNotFoundError(f"Environment file '{env_file}' not found in config/")

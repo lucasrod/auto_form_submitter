@@ -6,10 +6,5 @@ __pycache__/
 *.pyc
 *.pyo
 logs/
-# ignore all .env files
-*.env
-# but track config/.env for sample/testing
-!config/.env
-# Ignore config env files unless explicitly tracked
-config/.env.prod
+.env
 auto_form_submitter/

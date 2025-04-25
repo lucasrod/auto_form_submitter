@@ -15,13 +15,14 @@ class LoginHandler(AbstractScraper):
         page = self.browser.new_page()
         page.goto(self.login_url)
 
+        logging.info("Filling credentials...")
         page.fill("#login-email", self.username)
         page.fill("#login-password", self.password)
 
         logging.info("Submitting credentials...")
         page.click('button[type="submit"]')
 
-        # Esperar hasta la redirección al Prenotazione Consolare Procedura
+        # Wait for redirect to UserArea
         page.wait_for_url("**/UserArea", timeout=200000)
 
         logging.info("Login successful.")
