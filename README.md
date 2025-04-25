@@ -36,12 +36,32 @@ playwright install  # Install required browsers
 
 ## ⚙️ Configuration
 ### Setting Up Environment Variables
-Create a `.env` file inside the `config/` directory and add:
-```
-USERNAME=your_username
-PASSWORD=your_password
-LOGIN_URL=https://example.com/login
-```
+All environment variables live in the `config/` directory. Create one of the following files:
+
+- `config/.env` (fallback defaults):
+  ```ini
+  ENVIRONMENT=TESTING
+  USERNAME=testuser@gmail.com
+  PASSWORD=testpass
+  GMAIL_USER=testuser@gmail.com
+  GMAIL_PASS=testpass
+  ```
+- `config/.env.testing` (explicit testing mode):
+  ```ini
+  ENVIRONMENT=TESTING
+  USERNAME=<your_test_username>
+  PASSWORD=<your_test_password>
+  GMAIL_USER=<your_gmail_user>
+  GMAIL_PASS=<your_gmail_pass>
+  ```
+- `config/.env.prod` (production mode – do NOT commit real secrets):
+  ```ini
+  ENVIRONMENT=PROD
+  USERNAME=<your_prod_username>
+  PASSWORD=<your_prod_password>
+  GMAIL_USER=<your_gmail_user>
+  GMAIL_PASS=<your_gmail_pass>
+  ```
 
 ## 🚀 Usage
 Run the main script to start monitoring and submitting the form:
@@ -50,9 +70,20 @@ python src/main.py
 ```
 
 ## 🧪 Running Tests
-To run unit tests:
-```
-pytest tests/
+To execute the full test suite in **TESTING** mode, follow these steps:
+
+```bash
+# 1. Create and activate the Conda environment
+conda env create -f environment.yml
+conda activate auto_form_submitter
+
+# 2. Install dependencies and browsers
+pip install -r requirements.txt
+playwright install  # download required browser binaries
+
+# 3. Run tests under the testing environment
+export ENVIRONMENT=TESTING
+pytest -q
 ```
 
 ## 📜 License
