@@ -1,5 +1,4 @@
 import logging
-from selenium.webdriver.common.by import By
 from utils.abstract_scraper import AbstractScraper
 
 class FormHandler(AbstractScraper):

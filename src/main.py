@@ -6,6 +6,17 @@ from auth.login_handler import LoginHandler
 from forms.form_handler import FormHandler
 from scheduler.appointment_scheduler import AppointmentScheduler
 
+
+from utils.env_loader import load_environment
+
+load_environment()
+
+from auth.login_handler import LoginHandler
+
+handler = LoginHandler()
+handler.login()
+
+
 load_dotenv()  # Ensure environment variables are loaded
 
 # Configure logging
@@ -45,8 +56,8 @@ def main():
             scheduler.schedule_appointment()
             break
         else:
-            logging.info("No appointment available, retrying in 30 seconds...")
-            time.sleep(30)
+            logging.info("No appointment available, retrying in 1 second...")
+            time.sleep(1)
 
     logging.info("Process completed, closing browser.")
     driver.quit()
