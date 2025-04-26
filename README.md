@@ -94,6 +94,44 @@ playwright install  # download required browser binaries
 # 3. Run tests under the testing environment
 export ENVIRONMENT=TESTING
 pytest -q
+
+---
+
+## 🔒 Freezing the Environment for Offline Use
+
+If you have limited internet and want to lock down your Python deps **and** Playwright browser binaries, follow these steps:
+
+1. Pin exact Python packages:
+   ```bash
+   pip freeze > requirements.lock
+   ```
+   Ensure `requirements.txt` pins `playwright==1.50.0` so the package version cannot change.
+
+2. Export your full Conda environment spec:
+   ```bash
+   conda list --explicit > conda-spec.txt
+   ```
+
+3. Backup the Playwright browser cache directory:
+   ```bash
+   tar czf playwright-browsers.tar.gz ~/.cache/ms-playwright
+   ```
+
+To restore everything offline on the same or another machine:
+```bash
+# 1. Create the Conda env from the explicit spec
+conda create --name auto_form_submitter --file conda-spec.txt
+conda activate auto_form_submitter
+
+# 2. Install Python packages offline (use a local wheels directory or keep pip cache)
+pip install --no-index --find-links /path/to/wheelhouse -r requirements.lock
+
+# 3. Unpack browser binaries back into the Playwright cache
+tar xzf playwright-browsers.tar.gz -C ~/.cache/ms-playwright
+
+# Optional: prevent any further browser downloads
+export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+```
 ```
 
 ## 📜 License
