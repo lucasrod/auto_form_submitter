@@ -69,6 +69,16 @@ Run the main script to start monitoring and submitting the form:
 python src/main.py
 ```
 
+## 🔄 Execution Flow
+When you run `python src/main.py`, the following steps are executed in order:
+
+1. **Load environment**: `utils/env_loader.load_environment()` reads `config/.env*` and sets all required variables.
+2. **Initialize logging**: logs are written to `logs/app.log` with timestamp and level.
+3. **Authenticate**: `LoginHandler` launches a headless browser, navigates to the login page, fills credentials, and waits for `/UserArea`.
+4. **Inspect & submit form**: `FormHandler` analyses the booking form, loads a JSON payload template from `data/form_payload_templates.json`, and submits it.
+5. **Poll for availability**: `AppointmentScheduler` checks up to 10 times for available slots (with 1 s interval), and schedules when found.
+6. **Cleanup**: the browser session is closed via `login_handler.close()`.
+
 ## 🧪 Running Tests
 To execute the full test suite in **TESTING** mode, follow these steps:
 
