@@ -8,4 +8,5 @@ __pycache__/
 logs/
 .env
 auto_form_submitter/
-/*.png  # ignore root-level png files (e.g., screenshots)
+# Ignore screenshots in project root
+/Screenshot*.png
