@@ -94,6 +94,7 @@ playwright install  # download required browser binaries
 # 3. Run tests under the testing environment
 export ENVIRONMENT=TESTING
 pytest -q
+```
 
 ---
 
@@ -131,7 +132,6 @@ tar xzf playwright-browsers.tar.gz -C ~/.cache/ms-playwright
 
 # Optional: prevent any further browser downloads
 export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-```
 ```
 
 ## 📜 License
