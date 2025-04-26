@@ -96,8 +96,6 @@ export ENVIRONMENT=TESTING
 pytest -q
 ```
 
----
-
 ## 🔒 Freezing the Environment for Offline Use
 
 If you have limited internet and want to lock down your Python deps **and** Playwright browser binaries, follow these steps:
